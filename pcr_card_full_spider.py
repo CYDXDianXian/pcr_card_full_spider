@@ -20,8 +20,10 @@ headers = {
 proxy = {}
 # 若不用代理，将链接清空即可。
 
-# 图片下载链接获取模块（同步）
 def get_urls():
+    '''
+    图片下载链接获取（同步）
+    '''
     global get_urls_msg
     start_time = time.time()
     base = "https://redive.estertion.win/card/full/"
@@ -42,8 +44,10 @@ def get_urls():
     time.sleep(3)
     return urls
 
-# 图片转码模块
 def changeType(path_input, path_output, img_type = "png"):
+    '''
+    图片转码
+    '''
     start = time.time()
 
     try:
@@ -90,8 +94,10 @@ def changeType(path_input, path_output, img_type = "png"):
     print(f'全部转换完成！！！共成功{success_num}个，失败{error_num}个，用时{int(end - start)}秒')
     print(f'文件输出路径：{path_output}')
 
-# 图片下载模块（异步）
 async def aiodownload(url):
+    '''
+    图片下载（异步）
+    '''
     global success_download, error_download # 必须加全局声明，否则下载计数会出现错误
     success_download = 0
     error_download = 0
@@ -112,8 +118,10 @@ async def aiodownload(url):
         traceback.print_exc()
         print(f'图片下载失败{error_download}个：{name}')
 
-# 主协程对象
 async def main():
+    '''
+    主协程对象
+    '''
     urls = get_urls() #后续需要调用两次urls，这样做只需调用一次get_urls函数，节省资源
     start = time.time() 
     tasks = [aiodownload(url) for url in urls] # 生成执行任务的列表
