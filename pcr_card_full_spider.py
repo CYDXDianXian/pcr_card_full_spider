@@ -33,7 +33,7 @@ def get_urls():
     except:
         print('网页请求超时，请检查网络连接')
         sys.exit() # 结束程序
-    resp.encodin = 'utf-8'
+    resp.encoding = 'utf-8'
     main_page = BeautifulSoup(resp.text, 'html.parser')
     alist = main_page.find('body').find_all('a')
     urls = [base + a.get('href') for a in alist]
